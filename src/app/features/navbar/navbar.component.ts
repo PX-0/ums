@@ -10,7 +10,7 @@ import { AuthService } from 'src/app/core/services/auth.service';
 export class NavbarComponent {
   userIsLogged!: boolean;
 
-  username!: string;
+  username!: string | null;
 
   constructor(private router: Router, private readonly auth: AuthService) {
     this.auth.loggedIn
@@ -19,7 +19,7 @@ export class NavbarComponent {
         this.userIsLogged = value;
         const user = localStorage.getItem('user');
         const userObj = !!user ? JSON.parse(user) : null;
-        this.username = !!userObj.user_name ? userObj.user_name : null;
+        this.username = !!userObj ? userObj.user_name : null;
       },
     });
   }

@@ -1,5 +1,5 @@
-import { AfterViewInit, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { FormUserService } from 'src/app/core/services/form-user.service';
 import { FormUser } from 'src/app/models/form-user';
 import { User } from 'src/app/models/user';
