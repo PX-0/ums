@@ -1,0 +1,16 @@
+.backdrop{
+    height: calc(100vh - 56px);
+    width: 100%;
+    z-index: 999;
+    position: absolute;
+    left: 0;
+    top:0;
+    background-color:transparent;
+    backdrop-filter: blur(1px);
+    padding-top: 1rem;
+
+    display:flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}

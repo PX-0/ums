@@ -1,0 +1,17 @@
+.wrapper{
+    position: relative;
+    padding: 2rem;
+}
+.main{
+
+    height: calc(100vh - 56px);
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+    background-image: url("../../../assets/img/Icon-Grid.svg");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}

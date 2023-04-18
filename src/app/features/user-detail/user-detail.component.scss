@@ -1,0 +1,20 @@
+.new-user-page{
+    height: calc(100vh - 108.1px);
+
+    display: flex;
+    justify-content: center;
+    
+}
+.main{
+
+    height: calc(100vh - 56px);
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+    background-image: url("../../../assets/img/Icon-Grid.svg");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}

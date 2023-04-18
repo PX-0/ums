@@ -1,0 +1,29 @@
+<div class="table-responsive ">
+  <table class="table table-hover table-bordered" *ngIf="Objects">
+      <thead>
+        <tr>
+          <th *ngFor="let col of cols" class="table-warning text-uppercase" scope="col">
+            {{ col }}
+          </th>
+          <th *ngIf="ExtraCol"  class="table-warning text-uppercase" scope="col">{{ExtraCol}}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let obj of Objects" class="table-dark">
+          <td class="table-dark" *ngFor="let col of cols; let i = index">
+            <div *ngFor="let item of obj | keyvalue">
+              <div *ngIf="item.key === cols[i]">
+                {{item.value | nullcase}}
+              </div>
+            </div>
+          </td>
+          <div *ngIf="ExtraCol">
+            <div class="d-flex justify-content-evenly">
+              <button class="btn btn-outline-warning  btn-sm" (click)="onClickEditHandler(obj)"><i class="bi bi-pencil-square pe-2"></i>EDIT</button>
+              <button class="btn btn-outline-danger  btn-sm" (click)="onClickDeleteHandler(obj)"><i class="bi bi-trash3 pe-2"></i>DELETE</button>
+            </div>
+          </div>
+        </tr>
+      </tbody>
+    </table>
+</div>

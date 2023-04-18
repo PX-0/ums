@@ -1,0 +1,11 @@
+<main class="main">
+  <div class="wrapper">
+    <div class="table-responsive" *ngIf="UsersDump">
+      <app-table [Objects]="UsersDump.data" (onClickEvent)="onClickHandler($event)" [ExtraCol]="'actions'"></app-table>
+    </div>
+  
+    <app-modal [Show]="showModal">
+      <app-form-user [user]="selectedUser" (onCloseEvent)="setShowModal()" [EditUserMode]="true" (onSaveEditEvent)="onSaveEditHandler($event)"></app-form-user>
+    </app-modal>
+  </div>
+</main>

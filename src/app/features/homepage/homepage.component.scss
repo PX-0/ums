@@ -1,0 +1,23 @@
+.main{
+
+    height: calc(100vh - 56px);
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+    background-image: url("../../../assets/img/image-homapage.png");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+    .title{
+        width: 70vw;
+        text-align: center;
+        margin-top: 3rem;
+        border: 1px;
+        border-radius: 10px;
+        background-color: rgba(250, 250, 250, 0.788);
+        backdrop-filter: blur(1px);
+    }

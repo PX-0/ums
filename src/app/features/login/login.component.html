@@ -1,0 +1,23 @@
+<main class="main">
+  <div class="wrapper-login-form">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmitHandler()">
+      <div class="mb-3">
+        <label class="form-label text-uppercase fw-bold">Email</label>
+        <input type="text" formControlName="email" class="form-control" [class.is-invalid]="loginForm.controls['email'].invalid && (loginForm.controls['email'].dirty || loginForm.controls['email'].touched)" />
+        <div class="invalid-feedback" *ngIf="loginForm.controls['email'].invalid && (loginForm.controls['email'].dirty || loginForm.controls['email'].touched)">
+          <span *ngIf="loginForm.controls['email'].errors?.['required']">Email è richiesta.</span>
+          <span *ngIf="loginForm.controls['email'].errors?.['email']">Email non è valida.</span>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label class="form-label text-uppercase fw-bold">Password</label>
+        <input type="password" formControlName="password" class="form-control" [class.is-invalid]="loginForm.controls['password'].invalid && (loginForm.controls['password'].dirty || loginForm.controls['password'].touched)" />
+        <div class="invalid-feedback" *ngIf="loginForm.controls['password'].invalid && (loginForm.controls['password'].dirty || loginForm.controls['password'].touched)">
+          <span *ngIf="loginForm.controls['password'].errors?.['required']">Password è richiesta.</span>
+          <span *ngIf="loginForm.controls['password'].errors?.['minlength']">Password deve essere lunga almeno 5 caratteri.</span>
+        </div>
+      </div>
+      <div class="text-end"><button class="btn btn-success" [disabled]="loginForm.invalid">Login</button></div>
+    </form>
+  </div>
+</main>
