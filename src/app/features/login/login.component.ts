@@ -11,6 +11,8 @@ import { Credentials } from 'src/app/models/user';
 })
 export class LoginComponent {
 
+  notFound:boolean = false;
+
   constructor(private readonly auth:AuthService,private readonly router:Router){}
 
   loginForm:FormGroup = new FormGroup({
@@ -24,6 +26,8 @@ export class LoginComponent {
       this.auth.login(email,password);
       if(this.auth.isUserLoggedIn()){
         this.router.navigateByUrl('/');
+      }else{
+        this.notFound = true;
       }
     }
     

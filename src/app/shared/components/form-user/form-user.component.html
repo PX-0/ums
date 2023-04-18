@@ -29,9 +29,8 @@
       <label class="form-label text-uppercase fw-bold" for="email">Email:</label>
       <input type="email" id="email" (invalid)="formUser.controls.email.invalid" formControlName="email" />
       <div class="invalid-feedback" *ngIf="formUser.controls.email.invalid && (formUser.controls.email.dirty || formUser.controls.email.touched)">
-        <!-- <span *ngIf="formUser.controls.email.errors">email required.</span>
-        <span *ngIf="formUser.controls.email.errors">invalid email.</span> -->
-        AA
+        <span *ngIf="formUser.controls.email.errors">email required.</span>
+        <span *ngIf="formUser.controls.email.errors">invalid email.</span>
       </div>
     </div>
 
