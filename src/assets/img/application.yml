@@ -1,0 +1,98 @@
+spring:
+  application:
+    name: tpd-vaas
+    version: 0.0.1-SNAPSHOT
+  datasource:
+    url: ${DB_URL:jdbc:oracle:thin:@//dblab21.servizi.gr-u.it:1541/DBLAB21}
+    username: ${DB_USER:MFLAB21}
+    password: ${DB_PWD:mflab21}
+    driver-class-name: oracle.jdbc.OracleDriver
+  codec:
+    max-in-memory-size: 5MB
+  main:
+    allow-bean-definition-overriding: true
+  autoconfigure:
+    exclude[0]: org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
+    exclude[1]: org.springframework.boot.actuate.autoconfigure.security.servlet.ManagementWebSecurityAutoConfiguration
+
+# Define JWT properties
+jwt:
+  certificate-path: ${APP_MOUNT:src/test/resources}
+  audience: mov,tpd
+
+constants:
+  apicConfig-client-id: "571148e2-091f-464c-9d8a-9d7ba8c6b87a"
+  apicConfig-client-secret: "xU5uE0tR4sK1tN6xK2eW6cE6iB1uK4sD3qH8wD0dE0eJ3bC2wF"
+
+uca-secrets:
+  x-ibm-client-id: ${UCA_CLIENT_ID:b53f643a-6dbd-41f9-9428-e6e029a4033e}
+  x-ibm-client-secret: ${UCA_CLIENT_SECRET:Q7eU0qW2fK6pY2rG0gL3qV6iK2iC0xR2kG6dC2qN6oN0gC5bX5}
+  user-id: ${UCA_USERNAME:UTA00405}
+  pssw: ${UCA_PSSW:CON99TEC}
+
+rest-client-connections:
+  connections:
+    StsConnection:
+      baseUrl: ${STS_HOST:https://mpgw-svil.servizi.gr-u.it}
+      security:
+        type: None
+      endpoints:
+        StsConnector:
+          endpoint: "/sts/v1/token"
+          cbConfig: "cbLow"
+          tlDuration: 60000
+    VeicoloConnection:
+      baseUrl: "localhost"
+      security:
+        type: None
+      endpoints:
+        DeleteVeicoloRestClient:
+          endpoint: "/v1/api/veicolo/{id}"
+          cbConfig: "cbHigh"
+          tlDuration: 15000
+        GetAllVeicoloRestClient:
+          endpoint: "/v1/api/veicolo"
+          cbConfig: "cbHigh"
+          tlDuration: 15000
+        GetVeicoloByIdRestClient:
+          endpoint: "/v1/api/veicolo/{id}"
+          cbConfig: "cbHigh"
+          tlDuration: 15000
+        PostVeicoloRestClient:
+          endpoint: "/v1/api/veicolo"
+          cbConfig: "cbHigh"
+          tlDuration: 15000
+        PutVeicoloRestClient:
+          endpoint: "/v1/api/veicolo/{id}"
+          cbConfig: "cbHigh"
+          tlDuration: 15000
+
+# Define circuit breaking and retry properties
+resilience4j:
+  #CircuitBreaker properties
+  circuitbreaker:
+    instances:
+      high:
+        waitDurationInOpenState: 60000
+        failureRateThreshold: 75
+        slidingWindowSize: 30
+        minimumNumberOfCall: 833
+      medium:
+        waitDurationInOpenState: 300000
+        failureRateThreshold: 66
+        slidingWindowSize: 39
+        minimumNumberOfCall: 39
+      low:
+        waitDurationInOpenState: 900000
+        failureRateThreshold: 50
+        slidingWindowSize: 10
+        minimumNumberOfCall: 10
+
+swagger:
+  package: tpdvaas.bffapp
+  security: ${SWAGGER_SECURITY_ENABLED:false}
+
+server:
+  error:
+    include-message: always
+    port: 8080

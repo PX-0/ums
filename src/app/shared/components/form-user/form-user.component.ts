@@ -14,7 +14,6 @@ export class FormUserComponent implements OnChanges,OnInit {
   @Output() onSaveEditEvent: EventEmitter<any> = new EventEmitter<any>();
 
   @Input() user!: User;
-  @Input() EditUserMode!: boolean;
 
   formUser!:FormGroup<FormUser>;
 
@@ -23,12 +22,12 @@ export class FormUserComponent implements OnChanges,OnInit {
   constructor(private readonly formUserService:FormUserService){}
 
   ngOnInit(): void {
-    this.formUserService.getForm(this.user,this.EditUserMode);
+    this.formUserService.getForm(this.user);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['user']?.currentValue) {
-      this.formUser= this.formUserService.getForm(changes['user']?.currentValue,this.EditUserMode);
+      this.formUser= this.formUserService.getForm(changes['user']?.currentValue);
     }
   }
 
@@ -43,7 +42,7 @@ export class FormUserComponent implements OnChanges,OnInit {
       country: country,
       email: email,
       fiscalcode: fiscalcode,
-      id: this.EditUserMode ? this.user.id : id,
+      id: id,
       lastname: lastname,
       login: login,
       name: name,

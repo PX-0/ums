@@ -5,7 +5,7 @@
     </div>
   
     <app-modal [Show]="showModal">
-      <app-form-user [user]="selectedUser" (onCloseEvent)="setShowModal()" [EditUserMode]="true" (onSaveEditEvent)="onSaveEditHandler($event)"></app-form-user>
+      <app-form-user [user]="selectedUser" (onCloseEvent)="setShowModal()"  (onSaveEditEvent)="onSaveEditHandler($event)"></app-form-user>
     </app-modal>
   </div>
 </main>

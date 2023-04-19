@@ -8,7 +8,7 @@ export class FormUserService {
     
   private regExLogin: RegExp = /^([a-zA-Z0-9!$&*+=?^_`{|}~.-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*)|([_.@A-Za-z0-9-]+)$/;
 
-  getForm(user: User, editMode: boolean): FormGroup<FormUser> {
+  getForm(user: User): FormGroup<FormUser> {
     return new FormGroup<FormUser>({
       age: new FormControl<number>(user.age, { nonNullable: true }),
       country: new FormControl<string>(user.country, { nonNullable: true }),
@@ -22,7 +22,7 @@ export class FormUserService {
       name: new FormControl<string>(user.name, { nonNullable: true }),
       province: new FormControl<string>(user.province, { nonNullable: true }),
       phone: new FormControl<string>(user.phone, { nonNullable: true }),
-      id: new FormControl<number>({ value: user.id, disabled: editMode }, { nonNullable: true,validators:[Validators.required] }),
+      id: new FormControl<number>( user.id , { nonNullable: true,validators:[Validators.required] }),
     });
   }
 }

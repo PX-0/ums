@@ -1,17 +1,27 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { of, switchMap } from 'rxjs';
 import { UsersService } from 'src/app/core/services/users.service';
-import { User } from 'src/app/models/user';
+import { User, UsersObj } from 'src/app/models/user';
 
 @Component({
   selector: 'app-user-detail',
   templateUrl: './user-detail.component.html',
   styleUrls: ['./user-detail.component.scss'],
 })
-export class UserDetailComponent {
-  constructor(private readonly http: UsersService, private readonly router: Router) {}
+export class UserDetailComponent implements OnInit {
 
-  demo_user: User = { age: 18, country: '', email: '', fiscalcode: '', id: 0, lastname: '', login: '', name: '', phone: '', province: '' };
+  demo_user!: User;
+
+  constructor(private readonly http: UsersService, private readonly router: Router) {}
+  ngOnInit(): void {
+    this.http.getAllUsers()
+    .pipe(switchMap((value:UsersObj)=>of(value.data.sort((user1,user2)=>user1.id-user2.id).pop())))
+    .subscribe({next:(value)=>{if(!!value){this.demo_user = { age: 18, country: '', email: '', fiscalcode: '', id: (value.id+1), lastname: '', login: '', name: '', phone: '', province: '' }}
+    }})    
+  }
+
+   
 
   onCloseHandler() {
     this.router.navigateByUrl('/homepage');

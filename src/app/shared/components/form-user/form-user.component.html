@@ -60,12 +60,7 @@
 
     <div class="mb-3 d-flex justify-content-between align-items-center">
       <label class="form-label text-uppercase fw-bold" for="age">Id:</label>
-      <div>
-        <input  class="form-control" type="number" id="id" formControlName="id" [class.is-invalid]="formUser.controls.id.invalid&& (formUser.controls.id['dirty'] || formUser.controls.id['touched'] )" />
-        <div class="invalid-feedback text-center" *ngIf="formUser.controls.id.invalid && (formUser.controls.id['dirty'] || formUser.controls.id['touched'])">
-          <span *ngIf="formUser.controls.id.errors?.['required']">id required.</span>
-        </div>
-      </div>
+      <input  class="form-control" type="number" id="id" formControlName="id" readonly />
     </div>
 
     <div class="d-flex justify-content-center gap-2 mt-2">
