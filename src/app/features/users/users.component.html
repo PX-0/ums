@@ -1,7 +1,7 @@
 <main class="main">
   <div class="wrapper">
-    <div class="table-responsive" *ngIf="UsersDump">
-      <app-table [Objects]="UsersDump.data" (onClickEvent)="onClickHandler($event)" [ExtraCol]="'actions'"></app-table>
+    <div class="table-responsive" *ngIf="Users">
+      <app-table [Objects]="Users" (onClickEvent)="onClickHandler($event)" [ExtraCol]="'actions'"></app-table>
     </div>
   
     <app-modal [Show]="showModal">

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { Observable, lastValueFrom, takeUntil } from 'rxjs';
+import { Observable, lastValueFrom, of, switchMap, takeUntil } from 'rxjs';
 import { OnDestroyHandler } from 'src/app/core/abstractions/ondestroy-handler';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { UsersService } from 'src/app/core/services/users.service';
@@ -13,9 +13,7 @@ import { User, UsersObj } from 'src/app/models/user';
 export class UsersComponent extends OnDestroyHandler implements OnInit {
   selectedUser!: User;
 
-  Users$!: UsersObj;
-
-  UsersDump!: UsersObj;
+  Users!: Array<User>;
 
   cols: string[] = [];
 
@@ -26,10 +24,8 @@ export class UsersComponent extends OnDestroyHandler implements OnInit {
   }
 
   ngOnInit(): void {
-    lastValueFrom(this.usersService.getAllUsers()).then((value) => {
-      // this.Users$ = value;
-      this.UsersDump = value;
-    });
+    this.usersService.getAllUsers().pipe(switchMap((value=>of(value.data))),takeUntil(this.destroy$))
+    .subscribe({next:value=>{this.Users = value}})
   }
 
   setShowModal() {
@@ -55,8 +51,8 @@ export class UsersComponent extends OnDestroyHandler implements OnInit {
 
     if (proceed) {
       // this.usersService.deleteUserById(user.id);
-      const indexUserToRemove = this.UsersDump.data.findIndex((user) => user.id === user.id);
-      this.UsersDump.data.splice(indexUserToRemove, 1);
+      const indexUserToRemove = this.Users.findIndex((user) => user.id === user.id);
+      this.Users.splice(indexUserToRemove, 1);
     }
   }
 
@@ -66,9 +62,9 @@ export class UsersComponent extends OnDestroyHandler implements OnInit {
     this.usersService.updateUserById(formValue.id, formValue);
 
     //fake update per aggiornare la pagina
-    const indexOldUser = this.UsersDump.data.findIndex((user) => user.id === formValue.id);
-    this.UsersDump.data.splice(indexOldUser, 1);
-    this.UsersDump.data.push(formValue);
-    this.UsersDump.data.sort((user1, user2) => user1.id - user2.id);
+    const indexOldUser = this.Users.findIndex((user) => user.id === formValue.id);
+    this.Users.splice(indexOldUser, 1);
+    this.Users.push(formValue);
+    this.Users.sort((user1, user2) => user1.id - user2.id);
   }
 }
