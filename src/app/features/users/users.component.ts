@@ -27,8 +27,8 @@ export class UsersComponent extends OnDestroyHandler implements OnInit {
 
   ngOnInit(): void {
     lastValueFrom(this.usersService.getAllUsers()).then((value) => {
-      this.Users$ = value;
-      this.UsersDump = this.Users$;
+      // this.Users$ = value;
+      this.UsersDump = value;
     });
   }
 

@@ -1,6 +1,7 @@
 import { EventEmitter, Injectable, Output } from '@angular/core';
 import { UsersService } from './users.service';
 import { LoginObj } from 'src/app/models/user';
+import { lastValueFrom } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -11,11 +12,10 @@ export class AuthService {
   constructor(private readonly http: UsersService) {}
 
   login(email: string, password: string): void {
-    this.http.loginUser(email, password).subscribe((user: LoginObj) => {
-      localStorage.setItem('user',JSON.stringify(user))
-      this.loggedIn.emit(this.isUserLoggedIn());
-    });
+   lastValueFrom(this.http.loginUser(email,password)).then(value=>{localStorage.setItem('user',JSON.stringify(value));this.loggedIn.emit(this.isUserLoggedIn())})
   }
+    
+  
 
   isUserLoggedIn(): boolean {
     return !!localStorage.getItem('user');

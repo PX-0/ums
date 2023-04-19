@@ -24,10 +24,6 @@ export class FormUserComponent implements OnChanges,OnInit {
 
   ngOnInit(): void {
     this.formUserService.getForm(this.user,this.EditUserMode);
-    this.formUser.controls.email.valueChanges.subscribe({next:()=>console.log(this.formUser.controls.email.errors)});
-    this.formUser.controls.login.valueChanges.subscribe({next:()=>console.log(this.formUser.controls.login.errors)});
-    this.formUser.controls.id.valueChanges.subscribe({next:()=>console.log(this.formUser.controls.id.errors)});
-    
   }
 
   ngOnChanges(changes: SimpleChanges): void {
