@@ -21,7 +21,7 @@ export class UsersComponent extends OnDestroyHandler implements OnInit {
 
   showModal: boolean = false;
 
-  constructor(private readonly usersService: UsersService,private auth:AuthService) {
+  constructor(private readonly usersService: UsersService) {
     super();
   }
 
