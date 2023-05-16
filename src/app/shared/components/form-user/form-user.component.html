@@ -30,8 +30,8 @@
       <div>
         <input  class="form-control" type="email" id="email" [class.is-invalid]="formUser.controls.email.invalid&& (formUser.controls.email['dirty'] || formUser.controls.email['touched'] )" formControlName="email" />
         <div class="invalid-feedback text-center" *ngIf="formUser.controls.email.invalid && (formUser.controls.email['dirty'] || formUser.controls.email['touched'])">
-          <p *ngIf="formUser.controls.email.errors?.['required']">email required.</p>
-          <p *ngIf="formUser.controls.email.errors?.['email']">invalid email.</p>
+          <span *ngIf="formUser.controls.email.errors?.['required']">email required.</span>
+          <span *ngIf="formUser.controls.email.errors?.['email']">invalid email.</span>
         </div>
       </div>
     </div>
@@ -51,9 +51,9 @@
       <div>
         <input  class="form-control" type="text" id="login" formControlName="login" [class.is-invalid]="formUser.controls.login.invalid&& (formUser.controls.login['dirty'] || formUser.controls.login['touched'] )" />
         <div class="invalid-feedback text-center" *ngIf="formUser.controls.login.invalid && (formUser.controls.login['dirty'] || formUser.controls.login['touched'])">
-          <p *ngIf="formUser.controls.login.errors?.['required']">login required.</p>
-          <p *ngIf="formUser.controls.login.errors?.['pattern']">invalid login.</p>
-          <p *ngIf="formUser.controls.login.errors?.['minlength']">login must be at least of 5 chars </p>
+          <span *ngIf="formUser.controls.login.errors?.['required']">login required.</span>
+          <span *ngIf="formUser.controls.login.errors?.['pattern']">invalid login.</span>
+          <span *ngIf="formUser.controls.login.errors?.['minlength']">login must be at least of 5 chars </span>
         </div>
       </div>
     </div>
