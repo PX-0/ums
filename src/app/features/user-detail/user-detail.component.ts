@@ -1,3 +1,4 @@
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { of, switchMap } from 'rxjs';
@@ -13,12 +14,16 @@ export class UserDetailComponent implements OnInit {
 
   demo_user!: User;
 
+  errorMsg!:HttpResponse<any>;
+
   constructor(private readonly http: UsersService, private readonly router: Router) {}
   ngOnInit(): void {
     this.http.getAllUsers()
     .pipe(switchMap((value:UsersObj)=>of(value.data.sort((user1,user2)=>user1.id-user2.id).pop())))
     .subscribe({next:(value)=>{if(!!value){this.demo_user = { age: 18, country: '', email: '', fiscalcode: '', id: (value.id+1), lastname: '', login: '', name: '', phone: '', province: '' }}
     }})    
+
+    this.http.errorMessage.subscribe({next:(value:HttpResponse<any>)=>{this.errorMsg = value}})
   }
 
    
@@ -29,6 +34,9 @@ export class UserDetailComponent implements OnInit {
 
   onSaveHandler(formValue: any) {
     this.http.addUser(formValue);
-    this.router.navigateByUrl('/homepage');
+
+    console.log(this.errorMsg);
+    
+    
   }
 }

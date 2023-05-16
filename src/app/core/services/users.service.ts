@@ -1,5 +1,5 @@
-import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
+import { HttpClient, HttpResponse } from "@angular/common/http";
+import { EventEmitter, Injectable, Output } from "@angular/core";
 import { enviroment } from "../enviroments/enviroment";
 import { Observable, lastValueFrom } from "rxjs";
 import {  LoginObj, User, UsersObj } from "src/app/models/user";
@@ -7,7 +7,11 @@ import {  LoginObj, User, UsersObj } from "src/app/models/user";
 @Injectable({providedIn:'root'})
 export class UsersService{
 
+    @Output() errorMessage = new EventEmitter<any>();
+
     constructor(private readonly http:HttpClient){}
+
+    error!:HttpResponse<any>
 
     getUserById(id:number):Observable<UsersObj>{
         return this.http.get<UsersObj>(enviroment.url_db+"/users/"+id)
@@ -24,10 +28,8 @@ export class UsersService{
         }});;
     }
 
-    addUser(user:User):void{
-        this.http.post(enviroment.url_db+"/users",user).subscribe({error(err) {
-            console.log(err);
-        }});;
+    addUser(user:User):void{ 
+        this.http.post(enviroment.url_db+"/users",user).subscribe({error:(err)=> this.errorMessage.emit(err)})
     }
 
     updateUserById(id:number,user:User):void{

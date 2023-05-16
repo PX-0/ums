@@ -58,11 +58,6 @@
       </div>
     </div>
 
-    <div class="mb-3 d-flex justify-content-between align-items-center">
-      <label class="form-label text-uppercase fw-bold" for="age">Id:</label>
-      <input  class="form-control" type="number" id="id" formControlName="id" readonly />
-    </div>
-
     <div class="d-flex justify-content-center gap-2 mt-2">
       <button type="submit" [disabled]="formUser.invalid" class="btn btn-success">SAVE</button>
       <button class="btn btn-danger" (click)="onCloseHandler()">CANCEL</button>

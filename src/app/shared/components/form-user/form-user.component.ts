@@ -32,9 +32,9 @@ export class FormUserComponent implements OnChanges,OnInit {
   }
 
   onSaveHandler() {
-      const { age, country, email, fiscalcode, lastname, login, name, phone, province, id } = this.formUser.value as Pick<
+      const { age, country, email, fiscalcode, lastname, login, name, phone, province } = this.formUser.value as Pick<
       User,
-      'id' | 'age' | 'country' | 'email' | 'fiscalcode' | 'lastname' | 'login' | 'name' | 'phone' | 'province' | 'id'
+      'id' | 'age' | 'country' | 'email' | 'fiscalcode' | 'lastname' | 'login' | 'name' | 'phone' | 'province'
     >;
 
     const data: User = {
@@ -42,7 +42,7 @@ export class FormUserComponent implements OnChanges,OnInit {
       country: country,
       email: email,
       fiscalcode: fiscalcode,
-      id: id,
+      id: this.user.id,
       lastname: lastname,
       login: login,
       name: name,
