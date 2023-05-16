@@ -16,6 +16,7 @@ import { NavbarComponent } from './features/navbar/navbar.component';
 import { HomepageComponent } from './features/homepage/homepage.component';
 import { LoginComponent } from './features/login/login.component';
 import { FormUserComponent } from './shared/components/form-user/form-user.component';
+import { DropdownComponent } from './features/dropdown/dropdown.component';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { FormUserComponent } from './shared/components/form-user/form-user.compo
     NavbarComponent,
     HomepageComponent,
     LoginComponent,
-    FormUserComponent
+    FormUserComponent,
+    DropdownComponent
   ],
   imports: [
     ReactiveFormsModule,

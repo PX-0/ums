@@ -20,6 +20,10 @@ const routes: Routes = [
     path: 'login',
     loadChildren: () => import('./features/login/login.module').then((m) => m.LoginModule),
   },
+  {
+    path:'dropdown',
+    loadChildren:()=> import('./features/dropdown/dropdown.module').then((m)=>m.DropdownModule)
+  }
 ];
 
 @NgModule({
